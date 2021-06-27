@@ -4,14 +4,15 @@ A simple page view counter that store data as text and shows the counter as a PN
 
 ## How to use it
 
-Host these files on a cheap / free PHP server somewhere. Create a image element that points to it. *Don't forget to give write permission*
+Host these files on a cheap / free PHP server somewhere. Create a image element that points to it.
+**Don't forget to give write permission**
 
-*HTML Image* 
+**HTML Image** 
 ```
 <img src='https://my_cheap_server/imageCounter'>
 ```
 
-*MarkDown Image*  
+**MarkDown Image**  
 ```
 ![pageviews](https://my_cheap_server/imageCounter)
 ```
