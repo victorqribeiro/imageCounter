@@ -5,7 +5,7 @@ if (!file_exists($file)) {
 }
 $counter = file_get_contents($file) ?? 0;
 $counter = intval($counter) + 1;
-file_put_contents($file, $counter);
+file_put_contents($file, $counter, LOCK_EX);
 $fontsize = 24;
 $width = strlen(strval($counter)) * $fontsize * 0.8;
 $height = $fontsize * 2;
