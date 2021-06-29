@@ -3,9 +3,18 @@ $file = "counter.txt";
 if (!file_exists($file)) {
   touch($file);
 }
-$counter = file_get_contents($file) ?? 0;
-$counter = intval($counter) + 1;
-file_put_contents($file, $counter, LOCK_EX);
+$handle = fopen($file, "r+");
+if (flock($handle, LOCK_EX)) {
+  $counter = fread($handle, filesize($file)) ?? 0;
+  $counter = intval($counter) + 1;
+  ftruncate($handle, 0);
+  rewind($handle);
+  fwrite($handle, $counter);
+  flock($handle, LOCK_UN);
+} else {
+  die('Could not open file');
+}
+fclose($handle);
 $fontsize = 24;
 $width = strlen(strval($counter)) * $fontsize * 0.8;
 $height = $fontsize * 2;
