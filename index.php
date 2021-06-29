@@ -10,6 +10,7 @@ if (flock($handle, LOCK_EX)) {
   ftruncate($handle, 0);
   rewind($handle);
   fwrite($handle, $counter);
+  fflush($handle);
   flock($handle, LOCK_UN);
 } else {
   die('Could not open file');
