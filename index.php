@@ -1,4 +1,8 @@
 <?php
+$theme = isset($_GET['theme']) ? $_GET['theme'] : 'light';
+if ($theme !== 'light' && $theme !== 'dark') {
+  $theme = 'light';
+}
 $file = "counter.txt";
 if (!file_exists($file)) {
   touch($file);
@@ -20,14 +24,10 @@ $fontsize = 24;
 $width = strlen(strval($counter)) * $fontsize * 0.8;
 $height = $fontsize * 2;
 $image = imagecreate($width, $height);
-$bgRed = 255;
-$bgGreen = 255;
-$bgBlue = 255;
-$bg = imagecolorallocatealpha($image, $bgRed, $bgGreen, $bgBlue, 0);
-$red = 0;
-$green = 0;
-$blue = 0;
-$black = imagecolorallocate($image, $red, $green, $blue);
+$bgValue = $theme === 'light' ? 255 : 0;
+$bg = imagecolorallocatealpha($image, $bgValue, $bgValue, $bgValue, 127);
+$colorValue = 255 - $bgValue;
+$black = imagecolorallocate($image, $colorValue, $colorValue, $colorValue);
 $font = "/var/www/html/imageCounter/arial.ttf";
 $posx = $width / $fontsize;
 $posy = $height / 2 + $fontsize / 2;
